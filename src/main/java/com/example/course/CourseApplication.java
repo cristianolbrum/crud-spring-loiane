@@ -20,7 +20,7 @@ public class CourseApplication {
 			courseRepository.deleteAll();
 			Course c = new Course();
 			c.setName("Angular com Spring");
-			c.setCategory("front-end");
+			c.setCategory("Front-end");
 			courseRepository.save(c);
 		};
 	}
