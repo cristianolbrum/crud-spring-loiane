@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @SQLDelete(sql = "UPDATE Course set STATUS  = 'Inativo' WHERE id = ?")
-@Where(clause = "status = Ativo")
+@Where(clause = "status = 'Ativo'")
 public class Course {
 
     @Id
@@ -26,13 +26,11 @@ public class Course {
     private String name;
 
     @NotBlank
-    @Length(min=10)
     @Pattern(regexp= "Back-end|Front-end")
     @Column(length = 10, nullable = false)
     private String category;
 
     @NotBlank
-    @Length(min=10)
     @Pattern(regexp= "Ativo|Inativo")
     @Column(length = 10, nullable = false)
     private String status = "Ativo";
@@ -59,5 +57,13 @@ public class Course {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
