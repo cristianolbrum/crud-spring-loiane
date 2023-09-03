@@ -1,5 +1,6 @@
 package com.example.course.service;
 
+import com.example.course.exception.RecordNotFoundException;
 import com.example.course.model.Course;
 import com.example.course.repository.CourseRepository;
 import jakarta.validation.Valid;
@@ -21,8 +22,8 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public Optional<Course> findById(@PathVariable @NotNull @Positive Long id) {
-        return courseRepository.findById(id);
+    public Course findById(@PathVariable @NotNull @Positive Long id) {
+        return courseRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
 
     }
 
@@ -30,23 +31,19 @@ public class CourseService {
         return courseRepository.save(course);
     }
 
-    public Optional<Course> update(@Valid @NotNull @Positive Long id, Course course) {
+    public Course update(@Valid @NotNull @Positive Long id, Course course) {
         return courseRepository.findById(id)
                 .map(recordFound -> {
                     recordFound.setName(course.getName());
                     recordFound.setCategory(course.getCategory());
                     Course updated = courseRepository.save(recordFound);
                     return updated;
-                });
+                }).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public boolean delete(@NotNull Long id) {
-        return courseRepository.findById(id)
-                .map(recordFound -> {
-                    courseRepository.deleteById(id);
-                    return true;
-                })
-                .orElse(false);
+    public void delete(@NotNull Long id) {
+        courseRepository.delete(courseRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException(id)));
 }
 
     public CourseService(CourseRepository courseRepository) {
