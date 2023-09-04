@@ -23,11 +23,19 @@ public class CourseApplication {
 			Course c = new Course();
 			c.setName("Angular com Spring");
 			c.setCategory(Category.FRONT_END);
+
 			Lesson lesson = new Lesson();
 			lesson.setName("Introdução");
 			lesson.setYoutubeUrl("https://youtube.com");
 			lesson.setCourse(c);
 			c.getLessons().add(lesson );
+
+			Lesson lesson1 = new Lesson();
+			lesson1.setName("Angular");
+			lesson1.setYoutubeUrl("https://youtube.com/v2");
+			lesson1.setCourse(c);
+
+			c.getLessons().add(lesson1 );
 			courseRepository.save(c);
 		};
 	}
