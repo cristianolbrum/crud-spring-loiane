@@ -1,5 +1,6 @@
 package com.example.course.controller;
 
+import com.example.course.dto.CourseDTO;
 import com.example.course.model.Course;
 import com.example.course.repository.CourseRepository;
 import com.example.course.service.CourseService;
@@ -28,23 +29,23 @@ public class CourseController {
 
 
     @GetMapping
-    public List<Course> list(){
+    public List<CourseDTO> list(){
         return courseService.list();
     }
 
     @GetMapping("/{id}")
-    public Course findById(@PathVariable @NotNull @Positive Long id){
+    public CourseDTO findById(@PathVariable @NotNull @Positive Long id){
          return courseService.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Course create(@RequestBody @Valid Course course){
+    public CourseDTO create(@RequestBody @Valid @NotNull CourseDTO course){
         return courseService.create(course);
     }
 
     @PutMapping("/{id}")
-    public Course update(@PathVariable @Valid @NotNull @Positive Long id, @RequestBody Course course){
+    public CourseDTO update(@PathVariable @Valid @NotNull @Positive Long id, @RequestBody CourseDTO course){
         return courseService.update(id, course);
     }
 
