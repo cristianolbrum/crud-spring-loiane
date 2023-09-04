@@ -1,5 +1,7 @@
 package com.example.course.model;
 
+import com.example.course.enums.Category;
+import com.example.course.enums.conveters.CategoryConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -25,10 +27,10 @@ public class Course {
     @Column(length = 100, nullable = false)
     private String name;
 
-    @NotBlank
-    @Pattern(regexp= "Back-end|Front-end")
+
+    @Convert(converter = CategoryConverter.class)
     @Column(length = 10, nullable = false)
-    private String category;
+    private Category category;
 
     @NotBlank
     @Pattern(regexp= "Ativo|Inativo")
@@ -51,11 +53,11 @@ public class Course {
         this.name = name;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

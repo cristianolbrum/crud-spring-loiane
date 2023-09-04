@@ -1,5 +1,6 @@
 package com.example.course;
 
+import com.example.course.enums.Category;
 import com.example.course.model.Course;
 import com.example.course.repository.CourseRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +21,7 @@ public class CourseApplication {
 			courseRepository.deleteAll();
 			Course c = new Course();
 			c.setName("Angular com Spring");
-			c.setCategory("Front-end");
+			c.setCategory(Category.FRONT_END);
 			courseRepository.save(c);
 		};
 	}
