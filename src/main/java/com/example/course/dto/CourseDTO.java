@@ -9,5 +9,5 @@ import org.hibernate.validator.constraints.Length;
 public record CourseDTO(
         @JsonProperty("_id") Long id,
         @NotBlank @NotNull @Length(min = 5, max = 100) String name,
-        Category category){
+        String category){
 }
