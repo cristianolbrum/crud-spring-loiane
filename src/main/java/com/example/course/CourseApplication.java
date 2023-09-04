@@ -2,6 +2,7 @@ package com.example.course;
 
 import com.example.course.enums.Category;
 import com.example.course.model.Course;
+import com.example.course.model.Lesson;
 import com.example.course.repository.CourseRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,6 +23,11 @@ public class CourseApplication {
 			Course c = new Course();
 			c.setName("Angular com Spring");
 			c.setCategory(Category.FRONT_END);
+			Lesson lesson = new Lesson();
+			lesson.setName("Introdução");
+			lesson.setYoutubeUrl("https://youtube.com");
+			lesson.setCourse(c);
+			c.getLessons().add(lesson );
 			courseRepository.save(c);
 		};
 	}
